@@ -25,16 +25,22 @@ class consensus_node:
 		print("   data        = %s" % msg.data)
 
 		if G[self.id][int(msg.id)] == 1:
-                        type_of_x = type(self.x)
-                        print("Type of x " + type_of_x) #[17:-2])
-#			self.x = consensus[consensus_type]([self.x, msg.data])
+                        type_of_x = str(type(self.x))
+                        type_of_x = type_of_x[7:-2]
+#                        print "type_of_x: " + type_of_x
+#                        print eval(type_of_x+"(msg.data)")
+#                        print consensus_dict[self.consensus_type]
+#                        print consensus_dict[self.consensus_type]([self.x, eval(type_of_x+'(msg.data)')])
+#                        print consensus_dict[self.consensus_type]([3, 45])
+			self.x = consensus_dict[self.consensus_type]([self.x, eval(type_of_x+'(msg.data)')])
 			print("Consensus update -->  x = %s" % str(self.x))
 
 	def publish(self):
-                #print("I am publishing")
+#                print("I am publishing")
 		msg = cons_data()
 		msg.id   = str(self.id)
 		msg.data = str(self.x)
+#                print msg
                 self.pub.publish(msg)
 
 
@@ -45,7 +51,7 @@ def main_loop():
 	node_id        = rospy.get_param('node_id', 0)
 	consensus_type = rospy.get_param('consensus_type', 'max')
 	init_value     = rospy.get_param('init_value', 7)
-	rate           = rospy.get_param('rate', 10)
+	rate           = rospy.get_param('rate', 1)
 
 	cons_node = consensus_node(node_id, consensus_type, init_value) #, rate)
 
