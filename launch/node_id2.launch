@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!-- Node parameters -->
+	<arg name="id"              	default="2" />
+	<arg name="consensus"     		default="max" />
+	<arg name="initial_value"     	default="37.23" />
+	<arg name="rate"     			default="0.1" />
+
+	<!-- Run the consensus node -->
+	<node pkg="async_idpot_consensus" type="consensus_node.py" name="node_id$(arg id)" output="screen">
+			<param name="node_id" value="$(arg id)"/>
+			<param name="consensus_type" value="$(arg consensus)"/>
+			<param name="init_value" value="$(arg initial_value)"/>
+			<param name="rate" value="$(arg rate)"/>
+	</node>
+</launch>
