@@ -20,9 +20,9 @@ class consensus_node:
 
 
 	def my_handler(self, msg):
-		print("Received message")
-		print("   node_id     = %s" % msg.id)
-		print("   data        = %s" % msg.data)
+		#print("Received message")
+		#print("   node_id     = %s" % msg.id)
+		#print("   data        = %s" % msg.data)
 
 		if G[self.id][int(msg.id)] == 1:
                         type_of_x = str(type(self.x))
@@ -48,10 +48,10 @@ def main_loop():
 
 	rospy.init_node(NAME, anonymous=True)
 
-	node_id        = rospy.get_param('node_id', 0)
-	consensus_type = rospy.get_param('consensus_type', 'max')
-	init_value     = rospy.get_param('init_value', 7)
-	rate           = rospy.get_param('rate', 1)
+	node_id        = rospy.get_param('~node_id', 0)
+	consensus_type = rospy.get_param('~consensus_type', 'max')
+	init_value     = rospy.get_param('~init_value', 7)
+	rate           = rospy.get_param('~rate', 1)
 
 	cons_node = consensus_node(node_id, consensus_type, init_value) #, rate)
 
