@@ -7,6 +7,7 @@ add_message_files(
 	DIRECTORY msg
 	FILES
 	cons_data.msg
+	trigger_data.msg
 )
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
